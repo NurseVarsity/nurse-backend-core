@@ -1,0 +1,46 @@
+server:
+  port: 9001
+
+spring:
+  devtools:
+    restart:
+      enabled : false
+  application:
+    name: BackEndCore
+  datasource:
+    url: jdbc:mysql://ec2-52-72-168-51.compute-1.amazonaws.com:3306/nursevarsity
+    username: root
+    password: nursev@2024rsity
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: false
+  main:
+    web-application-type: servlet
+logging:
+  level:
+    org.springframework.web: DEBUG
+external:
+  aws:
+    accessKeyId: AKIA4QVH2O7HRU5HBYD3
+    secretKey: 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
+    bucket:
+      region: us-east-1
+    bucketName: nursevarsity-860419160015
+    email:
+      from: info@ivantage.africa
+  stripe:
+    apiKey: sk_test_51OEcZyK3Z581qmBudf6cakr07k0BR8V8EfBY2FkMe3KqQa8nljT8dCNmn24FPf1kAhhxsKS7Mvn0HN7n8mvnncep00tdWSDT8B
+    refreshLink: https://www.mylifeassugar.com/
+    returnLink: https://www.mylifeassugar.com/
+
+plans:
+  comprehensive:
+    productId : prod_QFV5tqRNEDDA3x
+    price: 4999
+  enhanced:
+    productId : prod_QFUzbQlxsbRQ5S
+    price : 2999
