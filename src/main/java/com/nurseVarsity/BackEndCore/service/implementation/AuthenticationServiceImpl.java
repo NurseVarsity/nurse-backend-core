@@ -159,12 +159,25 @@ public class AuthenticationServiceImpl implements com.nurseVarsity.BackEndCore.s
         return true;
     }
 
+    public boolean verifyToken(String token, String email) {
+        Users user = this.userRepository.findByEmail(email).orElseThrow(
+                () -> new NotFoundException("user not found")
+        );
+        if(!Objects.equals(token, user.getVerificationCode())){
+            throw new BadRequestException("incorrect token");
+        }
+        return true;
+    }
+
     @Override
     public boolean forgotPassword(LoginReqDto loginReqDto) {
         Users user = this.userRepository.findByEmail(loginReqDto.getUsername()).orElseThrow(
                 () -> new NotFoundException("user not found")
         );
-        return false;
+        String encodedPassword = "{bcrypt}" + encoder.encode(loginReqDto.getPassword());
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+        return true;
     }
 
 }

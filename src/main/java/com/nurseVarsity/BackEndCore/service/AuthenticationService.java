@@ -14,5 +14,6 @@ public interface AuthenticationService {
     boolean verifyUser(String email, String otp);
     PersonalInformation addPersonalInfo(PersonalInfoDto personalInfoDto);
     boolean sendToken(String email);
+    boolean verifyToken(String token, String email);
     boolean forgotPassword(LoginReqDto loginReqDto);
 }
