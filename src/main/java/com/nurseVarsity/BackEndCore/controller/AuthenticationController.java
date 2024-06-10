@@ -92,4 +92,23 @@ public class AuthenticationController {
                         true, null), HttpStatus.CREATED
         );
     }
+
+    @GetMapping("/verifyToken")
+    public ResponseEntity<Response<String>> verifyToken(
+            @RequestParam("email") Optional<String> enailParam,
+            @RequestParam("otp") Optional<String> otpParam
+    ){
+        if (enailParam.isEmpty() || otpParam.isEmpty()) {
+            throw new BadRequestException("provide user email and otp");
+        }
+        this.authenticationService.verifyToken(otpParam.get(), otpParam.get());
+        return new ResponseEntity<>(
+                new Response<>("00", "token sent to user email",
+                        true, null), HttpStatus.CREATED
+        );
+    }
+
+
+
+
 }
